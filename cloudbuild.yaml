@@ -1,0 +1,25 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/my-first-project-466020/ad-campaign-model', '.']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/my-first-project-466020/ad-campaign-model']
+
+- name: 'gcr.io/my-first-project-466020/ad-campaign-model'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      python -m pytest
+
+- name: 'gcr.io/cloud-builders/git'
+  args: ['clone', 'https://github.com/daDiz/ad-campaign.git']
+
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', 'ad-campaign/ad_campaign_train.py', 'gs://us-central1-mlops-workflow-c95ed999-bucket/dags']
+
+images:
+- 'gcr.io/my-first-project-466020/ad-campaign-model'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
