@@ -18,17 +18,17 @@ steps:
 - name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp', 'ad-campaign/ad_campaign_train.py', 'gs://us-central1-mlops-workflow-c95ed999-bucket/dags']
 
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args:
-    - 'run'
-    - 'deploy'
-    - 'ad-campaign-service'
-    - '--image'
-    - 'gcr.io/my-first-project-466020/ad-campaign-model'
-    - '--region'
-    - 'us-central1'
-    - '--allow-unauthenticated'
+# - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#   entrypoint: gcloud
+#   args:
+#     - 'run'
+#     - 'deploy'
+#     - 'ad-campaign-service'
+#     - '--image'
+#     - 'gcr.io/my-first-project-466020/ad-campaign-model'
+#     - '--region'
+#     - 'us-central1'
+#     - '--allow-unauthenticated'
 
 images:
 - 'gcr.io/my-first-project-466020/ad-campaign-model'
