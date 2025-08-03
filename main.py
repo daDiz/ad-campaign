@@ -10,13 +10,13 @@ app = Flask(__name__)
 model = None
 
 
-def load_model():
+def _load_model():
     file_path = "model.joblib"
     model = joblib.load(file_path)
     return model
 
 
-def _load_model():
+def load_model():
     storage_client = storage.Client()
     bucket = storage_client.bucket("my-first-project-466020-bucket")
     blob = bucket.blob("advertising_roi_artifact/model.joblib")
